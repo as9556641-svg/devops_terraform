@@ -1,0 +1,41 @@
+ILLUSTRATIVE SAMPLE ONLY - These outputs are examples, not logs from an actual run.
+
+> terraform init
+Initializing the backend...
+Initializing provider plugins...
+- Finding kreuzwerker/docker versions matching "~> 3.0"...
+- Installing kreuzwerker/docker v3.x.x...
+- Installed kreuzwerker/docker v3.x.x (signed by a HashiCorp partner)
+
+Terraform has been successfully initialized!
+
+> terraform plan
+Terraform will perform the following actions:
+
+  # docker_image.nginx will be created
+  + resource "docker_image" "nginx" {
+      + name = "nginx:latest"
+    }
+
+  # docker_container.nginx will be created
+  + resource "docker_container" "nginx" {
+      + name = "terraform-nginx"
+      + ports {
+          + external = 8080
+          + internal = 80
+        }
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+> terraform apply
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+container_id = "<container-id>"
+public_url   = "http://localhost:8080"
+
+> terraform state list
+docker_container.nginx
+docker_image.nginx
